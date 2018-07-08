@@ -27,7 +27,7 @@ val placetogo = spark.sql("select venues.Name from venue where venue.Name not in
 
 placetogo.show
 
-val placetoavoid = spark.sql("select venues.Name from venue where venue.Name in (select venues.name from users,venues where users.Wont_eat = venue.Food);")
+val placetoavoid = spark.sql("select Name from (select venues.name from users,venues where users.Wont_eat = venue.Food) a;").collect()
 
 placetoavoid.show
 
